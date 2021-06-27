@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS directories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    path TEXT NOT NULL UNIQUE,
+    file_types TEXT,
+    interval INTEGER NOT NULL
+)
