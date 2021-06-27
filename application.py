@@ -11,10 +11,10 @@ from db import get_db
 
 if platform == "linux":
     # For linux send files to trash using 'gio trash' command
-    delete = "gio trash "
+    delete = "gio trash '%s'"
 else:
     # Using CmdUtils (http://www.maddogsw.com/cmdutils/) for Windows.
-    delete = "Recycle.exe "
+    delete = "Recycle.exe %s"
 
 
 def gui_application():
@@ -137,7 +137,7 @@ def cleaner():
                     continue
                 if (today - datetime.fromtimestamp(path.getmtime(file)).date()).days > row["interval"]:
                     tprint(2, f"[*] Deleting {file}")
-                    status = system(f"{delete} '{file}'")
+                    status = system(delete % file)
                     if status == 0:
                         tprint(2, f"[*] Deleted {file}")
                     else:
